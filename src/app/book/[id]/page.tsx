@@ -2,37 +2,59 @@
 
 import { useParams } from 'next/navigation';
 import BookPage from '@/components/book';
-import { Book } from '@/models/book.interface';
-import { Genre } from '@/models/genre.enum';
-
-const mockBook: Book = {
-  id: "1",
-  isbn: "978-0-123456-78-9",
-  title: "Sample Book Title",
-  author: "John Doe",
-  description: "This is a sample book description for testing purposes.",
-  publisher: "Sample Publisher",
-  publicationDate: "2023-01-01",
-  pages: 300,
-  genres: [Genre.Fantasy, Genre.Adventure],
-  language: "English",
-  available: true,
-  rating: 4.5,
-  price: 19.99,
-  coverImage: "https://via.placeholder.com/300x400"
-};
+import { useBook } from '@/hooks/useBook';
 
 export default function BookDetailPage() {
   const params = useParams();
-  const { id } = params;
+  const id = params?.id as string | undefined;
+  const { book, loading, error } = useBook(id ?? "");
+
+  if (loading) {
     return (
+      <div className="min-h-screen bg-gray-50 py-8">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex items-center justify-center h-64">
+            <div className="text-lg text-gray-600">Loading book...</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 py-8">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+            <h2 className="font-bold">Error</h2>
+            <p>{error}</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!book) {
+    return (
+      <div className="min-h-screen bg-gray-50 py-8">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center text-gray-600">
+            <h2 className="text-xl font-semibold">Book not found</h2>
+            <p>The book with ID {id} could not be found.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-6xl mx-auto px-4">
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Book Details</h1>
           <p className="text-gray-600">Book ID: {id}</p>
         </div>
-        <BookPage book={mockBook} />
+        <BookPage book={book} />
       </div>
     </div>
   );
