@@ -50,23 +50,101 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      <div className="w-full max-w-md">
+  };  return (
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 p-4 overflow-hidden">      {/* Animated Background with Floating Books */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Book Icons */}
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={i}
+            className={`absolute text-blue-300/20 animate-float-${i % 4}`}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${8 + Math.random() * 4}s`,
+            }}
+          >
+            <svg
+              className={`${i % 3 === 0 ? 'w-6 h-6' : i % 3 === 1 ? 'w-8 h-8' : 'w-10 h-10'}`}
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              style={{ transform: `rotate(${(i * 15) % 360}deg)` }}
+            >
+              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 19V5h6v14H5zm8 0V5h6v14h-6z"/>
+            </svg>
+          </div>
+        ))}
+          {/* Additional floating elements - Open books */}
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={`page-${i}`}
+            className={`absolute text-indigo-300/15 animate-float-page-${i % 3}`}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 6}s`,
+              animationDuration: `${10 + Math.random() * 5}s`,
+            }}
+          >
+            <svg
+              className={`${i % 2 === 0 ? 'w-4 h-4' : 'w-6 h-6'}`}
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+            </svg>
+          </div>
+        ))}
+        
+        {/* Floating sparkles */}
+        {[...Array(15)].map((_, i) => (
+          <div
+            key={`sparkle-${i}`}
+            className="absolute animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 2}s`,
+            }}            >
+            <div className="w-1 h-1 bg-blue-400/30 rounded-full"></div>
+          </div>
+        ))}
+        
+        {/* Additional book-related icons */}
+        {[...Array(6)].map((_, i) => (
+          <div
+            key={`bookmark-${i}`}
+            className={`absolute text-blue-400/20 animate-float-${(i + 2) % 4}`}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 7}s`,
+              animationDuration: `${12 + Math.random() * 6}s`,
+            }}
+          >
+            <svg
+              className="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
+            </svg>
+          </div>
+        ))}
+      </div>      <div className="relative z-10 w-full max-w-md">
         {/* Logo/Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">KyLib</h1>
-          <p className="text-gray-600">Welcome back! Please sign in to your account.</p>
+          <h1 className="text-3xl font-bold text-white mb-2">KyLib</h1>
+          <p className="text-gray-300">Welcome back! Please sign in to your account.</p>
         </div>
 
         {/* Sign In Form */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email Field */}
+        <div className="bg-gray-800/80 backdrop-blur-lg border border-gray-700/50 rounded-2xl shadow-2xl p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">            {/* Email Field */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-2">
                 Email Address
               </label>
               <input
@@ -74,38 +152,35 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-4 py-3 bg-gray-700/50 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-colors text-white placeholder-gray-400 ${
+                  errors.email ? 'border-red-400' : 'border-gray-600'
                 }`}
                 placeholder="Enter your email"
-                disabled={isLoading}
-              />
+                disabled={isLoading}              />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                <p className="mt-1 text-sm text-red-400">{errors.email}</p>
               )}
             </div>
 
             {/* Password Field */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-200 mb-2">
                 Password
               </label>
-              <div className="relative">
-                <input
+              <div className="relative">                <input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors pr-12 ${
-                    errors.password ? 'border-red-500' : 'border-gray-300'
+                  className={`w-full px-4 py-3 bg-gray-700/50 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-colors pr-12 text-white placeholder-gray-400 ${
+                    errors.password ? 'border-red-400' : 'border-gray-600'
                   }`}
                   placeholder="Enter your password"
                   disabled={isLoading}
-                />
-                <button
+                />                <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-200"
                   disabled={isLoading}
                 >
                   {showPassword ? (
@@ -121,35 +196,33 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
                 </button>
               </div>
               {errors.password && (
-                <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+                <p className="mt-1 text-sm text-red-400">{errors.password}</p>
               )}
             </div>
 
-            {/* Remember Me & Forgot Password */}
-            <div className="flex items-center justify-between">
+            {/* Remember Me & Forgot Password */}            <div className="flex items-center justify-between">
               <label className="flex items-center">
                 <input
                   type="checkbox"
-                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  className="rounded border-gray-600 bg-gray-700/50 text-blue-400 focus:ring-blue-400 focus:ring-offset-gray-800"
                   disabled={isLoading}
                 />
-                <span className="ml-2 text-sm text-gray-600">Remember me</span>
+                <span className="ml-2 text-sm text-gray-300">Remember me</span>
               </label>
               <button
                 type="button"
                 onClick={onForgotPassword}
-                className="text-sm text-blue-600 hover:text-blue-800 font-medium"
+                className="text-sm text-blue-400 hover:text-blue-300 font-medium"
                 disabled={isLoading}
               >
                 Forgot password?
               </button>
             </div>
 
-            {/* Sign In Button */}
-            <button
+            {/* Sign In Button */}            <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
@@ -166,22 +239,20 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
           </form>
 
           {/* Divider */}
-          <div className="mt-6">
-            <div className="relative">
+          <div className="mt-6">            <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300" />
+                <div className="w-full border-t border-gray-600" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Or continue with</span>
+                <span className="px-2 bg-gray-800/80 text-gray-400">Or continue with</span>
               </div>
             </div>
           </div>
 
-          {/* Social Sign In Options */}
-          <div className="mt-6 grid grid-cols-2 gap-3">
+          {/* Social Sign In Options */}          <div className="mt-6 grid grid-cols-2 gap-3">
             <button
               type="button"
-              className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+              className="w-full inline-flex justify-center py-2 px-4 border border-gray-600 rounded-lg shadow-sm bg-gray-700/50 text-sm font-medium text-gray-300 hover:bg-gray-600/50 hover:text-white transition-colors"
               disabled={isLoading}
             >
               <svg className="h-5 w-5" viewBox="0 0 24 24">
@@ -195,7 +266,7 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
 
             <button
               type="button"
-              className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+              className="w-full inline-flex justify-center py-2 px-4 border border-gray-600 rounded-lg shadow-sm bg-gray-700/50 text-sm font-medium text-gray-300 hover:bg-gray-600/50 hover:text-white transition-colors"
               disabled={isLoading}
             >
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -203,22 +274,19 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
               </svg>
               <span className="ml-2">Facebook</span>
             </button>
-          </div>
-
-          {/* Sign Up Link */}
+          </div>          {/* Sign Up Link */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-400">
               Don't have an account?{' '}
               <button
                 type="button"
                 onClick={onSignUp}
-                className="text-blue-600 hover:text-blue-800 font-medium"
+                className="text-blue-400 hover:text-blue-300 font-medium"
                 disabled={isLoading}
               >
                 Sign up here
               </button>
-            </p>
-          </div>
+            </p>          </div>
         </div>
       </div>
     </div>
