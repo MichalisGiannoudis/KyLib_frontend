@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from 'next/navigation';
-import BookPage from '@/components/book';
+import BookPage from '@/components/book.component';
 import { useBook } from '@/hooks/useBook';
 
 export default function BookDetailPage() {

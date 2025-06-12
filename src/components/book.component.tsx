@@ -1,16 +1,15 @@
-import { Book } from '@/models/book.interface';
+import { Book } from '@/types/book.interface';
 
-interface BookPageProps {
-  book: Book;
-}
-
-const BookPage = ( {book}: BookPageProps) => {    const renderGenres = () => {
+const BookPage = ( {book}: {book:Book} ) => {    
+    
+    const renderGenres = () => {
         if (!book.genres || !Array.isArray(book.genres)) return 'N/A';
         
         return book.genres.map(genre => {
             return typeof genre === 'string' ? genre : 'Uknown Genre';
         }).join(', ');
     };
+    
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
             <div className="flex flex-col md:flex-row gap-8">

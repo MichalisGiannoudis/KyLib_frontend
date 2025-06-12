@@ -1,11 +1,7 @@
-import { Book } from '@/models/book.interface';
+import { Book } from '@/types/book.interface';
 import Link from 'next/link';
 
-interface HeroSectionProps {
-  featuredBook?: Book;
-}
-
-const HeroSection = ({ featuredBook }: HeroSectionProps) => {
+const HeroSection = ({ featuredBook }: {featuredBook?:Book} ) => {
   if (!featuredBook) {
     return (
       <div className="relative h-96 bg-gradient-to-r from-purple-900 to-blue-900 flex items-center justify-center">

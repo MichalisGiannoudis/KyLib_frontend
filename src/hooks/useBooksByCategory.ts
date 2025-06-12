@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Book } from '@/models/book.interface';
-import { Genre } from '@/models/genre.enum';
+import { Book } from '@/types/book.interface';
+import { Genre } from '@/types/genre.enum';
 
 interface UseBooksByCategoryResult {
   booksByCategory: { [key: string]: Book[] };

@@ -1,15 +1,10 @@
 'use client';
 
-import { Book } from '@/models/book.interface';
-import BookCard from './BookCard';
+import { Book } from '@/types/book.interface';
+import BookCard from './bookCard.component';
 import { useState, useRef } from 'react';
 
-interface BookCarouselProps {
-  title: string;
-  books: Book[];
-}
-
-const BookCarousel = ({ title, books }: BookCarouselProps) => {
+const BookCarousel = ({ title, books }: { title:string, books:Book[]} ) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 

@@ -1,8 +1,8 @@
 'use client';
 
 import { useBooksByCategory } from '@/hooks/useBooksByCategory';
-import BookCarousel from '@/components/BookCarousel';
-import HeroSection from '@/components/HeroSection';
+import BookCarousel from '@/components/bookCarousel.component';
+import HeroSection from '@/components/heroSection.component';
 
 export default function HomePage() {
   const { booksByCategory, loading, error } = useBooksByCategory();

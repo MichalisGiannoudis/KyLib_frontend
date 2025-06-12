@@ -1,11 +1,7 @@
-import { Book } from '@/models/book.interface';
+import { Book } from '@/types/book.interface';
 import Link from 'next/link';
 
-interface BookCardProps {
-  book: Book;
-}
-
-const BookCard = ({ book }: BookCardProps) => {
+const BookCard = ({ book }: {book:Book} ) => {
   return (
     <Link href={`/book/${book.id}`} className="group block">
       <div className="relative flex-shrink-0 w-48 h-72 bg-gray-200 rounded-lg overflow-hidden shadow-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl">
