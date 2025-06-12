@@ -17,7 +17,6 @@ const BookCard = ({ book }: {book:Book} ) => {
           </div>
         )}
         
-        {/* Overlay with book info */}
         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100">
           <h3 className="text-white font-semibold text-sm mb-1 line-clamp-2">{book.title}</h3>
           <p className="text-gray-300 text-xs mb-2">{book.author}</p>
@@ -30,7 +29,6 @@ const BookCard = ({ book }: {book:Book} ) => {
           </div>
         </div>
 
-        {/* Available badge */}
         {!book.available && (
           <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
             Out of Stock
