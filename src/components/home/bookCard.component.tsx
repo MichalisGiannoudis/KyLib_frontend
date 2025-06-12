@@ -1,4 +1,4 @@
-import { Book } from '@/types/book.interface';
+import { Book } from '@/types/book/book.interface';
 import Link from 'next/link';
 
 const BookCard = ({ book }: {book:Book} ) => {
