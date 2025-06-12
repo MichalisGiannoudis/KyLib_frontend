@@ -1,2 +1,3 @@
-# ExTas
-Your daily tasks and expenses manager
+# KyLib
+
+Your ordinary Book library
