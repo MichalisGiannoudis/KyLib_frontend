@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Book } from '@/types/book.interface';
+import { Book } from '@/types/book/book.interface';
 
 interface UseBookResult {
   book: Book | null;

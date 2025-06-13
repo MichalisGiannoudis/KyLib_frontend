@@ -1,7 +1,7 @@
 'use client';
 
-import { Book } from '@/types/book.interface';
-import BookCard from '../bookCard.component';
+import { Book } from '@/types/book/book.interface';
+import BookCard from './bookCard.component';
 import { useState, useRef } from 'react';
 
 const BookCarousel = ({ title, books }: { title:string, books:Book[]} ) => {
