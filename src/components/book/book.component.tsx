@@ -4,7 +4,7 @@ import { BookContent } from '@/types/content/bookContent.interface';
 
 const BookPage = ( {book}: {book:Book} ) => {    
     
-    const { bookNameLabel, bookAuthorLabel, bookGenresLabel } = useContent('book-page') as BookContent;
+    const { bookNameLabel, bookAuthorLabel } = useContent('book-page') as BookContent;
 
     const renderGenres = () => {
         if (!book.genres || !Array.isArray(book.genres)) return 'N/A';
@@ -35,7 +35,7 @@ const BookPage = ( {book}: {book:Book} ) => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                         <div className="space-y-2">
                             <div className="flex">
-                                <span className="font-semibold text-gray-700 w-20">{bookGenresLabel}</span>
+                                <span className="font-semibold text-gray-700 w-20">Genre:</span>
                                 <span className="text-gray-600">{renderGenres()}</span>
                             </div>
                             <div className="flex">

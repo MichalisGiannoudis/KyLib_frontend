@@ -1,6 +1,8 @@
-import { ContentMap } from "@/types/content/bookContent.interface";
+import { ContentMap } from "@/types/content/content.interface";
 import { BookContent } from "./book/book.content";
+import { AuthContent } from "./auth/auth.content";
 
 export const contentMap: ContentMap = {
-    'book-page': BookContent
+    'book-page': BookContent,
+    'auth-page': AuthContent
 };

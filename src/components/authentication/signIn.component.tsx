@@ -1,5 +1,7 @@
 'use client';
 
+import { useContent } from '@/hooks/useContent';
+import { AuthContent } from '@/types/content/authContent.interface';
 import { useState } from 'react';
 
 interface SignInProps {
@@ -14,6 +16,7 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({ email: '', password: '' });
+  const { emailLabel, passwordLabel } = useContent('auth-page') as AuthContent;
 
   const validateForm = () => {
     const newErrors = { email: '', password: '' };
@@ -145,7 +148,7 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
           <form onSubmit={handleSubmit} className="space-y-6">            {/* Email Field */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-2">
-                Email Address
+                {emailLabel}
               </label>
               <input
                 id="email"
@@ -165,7 +168,7 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
             {/* Password Field */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-200 mb-2">
-                Password
+                {passwordLabel}
               </label>
               <div className="relative">                <input
                   id="password"
