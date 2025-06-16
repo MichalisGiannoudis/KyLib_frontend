@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from 'react';
 import { Book } from '@/types/book/book.interface';
 import { Genre } from '@/types/book/genre.enum';
