@@ -155,8 +155,7 @@ export const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: { onSignIn?: (e
                 className={`w-full px-4 py-3 bg-gray-700/50 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-colors text-white placeholder-gray-400 ${errors.email ? 'border-red-400' : 'border-gray-600'}`}
                 placeholder="Enter your email"
                 disabled={isLoading}/>
-              {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>
-              }
+              { errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p> }
             </div>
 
             {/* Password Field */}
@@ -178,18 +177,10 @@ export const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: { onSignIn?: (e
                   className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-200"
                   disabled={isLoading}
                 >
-                  {showPassword ?
-                    <div>
-                      <img src="/images/auth/show.png" className="h-5 w-5"/>
-                    </div>
-                   :
-                    <div>
-                      <img src="/images/auth/hide.png" className="h-5 w-5"/>
-                    </div>
-                  }
+                  { showPassword ? <div><img src="/images/auth/show.png" className="h-5 w-5"/></div> : <div><img src="/images/auth/hide.png" className="h-5 w-5"/></div> }
                 </button>
               </div>
-              {errors.password && <p className="mt-1 text-sm text-red-400">{errors.password}</p>}
+              { errors.password && <p className="mt-1 text-sm text-red-400">{errors.password}</p> }
             </div>
 
             {/* Remember Me & Forgot Password */}
@@ -207,7 +198,7 @@ export const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: { onSignIn?: (e
               disabled={isLoading}
               className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? <Spinner/>: 'Sign In'}
+              { isLoading ? <Spinner/>: 'Sign In' }
             </button>
           </form>
 
