@@ -142,10 +142,10 @@ export const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: { onSignIn?: (e
         {/* Sign In Form */}
         <div className="bg-gray-800/80 backdrop-blur-lg border border-gray-700/50 rounded-2xl shadow-2xl p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
+            
+            {/* Email Field */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-2">
-                {emailLabel}
-              </label>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-2">{emailLabel}</label>
               <input
                 id="email"
                 type="email"
@@ -160,9 +160,7 @@ export const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: { onSignIn?: (e
 
             {/* Password Field */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-200 mb-2">
-                {passwordLabel}
-              </label>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-200 mb-2">{passwordLabel}</label>
               <div className="relative">
                 <input 
                   id="password" 
@@ -190,9 +188,7 @@ export const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: { onSignIn?: (e
                   }
                 </button>
               </div>
-              {errors.password && (
-                <p className="mt-1 text-sm text-red-400">{errors.password}</p>
-              )}
+              {errors.password && <p className="mt-1 text-sm text-red-400">{errors.password}</p>}
             </div>
 
             {/* Remember Me & Forgot Password */}
@@ -276,19 +272,13 @@ export const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: { onSignIn?: (e
           </div>
 
           {/* Sign Up Link */}
-          <div className="mt-6 text-center">
-            <p className="text-sm text-gray-400">
-              Do not have an account?{' '}
-              <button
-                type="button"
-                onClick={onSignUp}
-                className="text-blue-400 hover:text-blue-300 font-medium"
-                disabled={isLoading}
-              >
-                Sign up here
-              </button>
-            </p>
+          <div className="mt-6 flex justify-between items-center text-gray-400">
+            <div className="flex items-center gap-2">
+              <p className="text-left text-sm text-gray-400">Do not have an account?{' '}</p>
+              <button type="button" onClick={onSignUp} className=" text-left  text-blue-400 hover:text-blue-300 font-medium" disabled={isLoading}> Sign up </button>
+            </div>
           </div>
+          
         </div>
       </div>
     </div>
