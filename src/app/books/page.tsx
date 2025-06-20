@@ -25,6 +25,7 @@ export default function BooksPage() {
   }
 
   const featuredBook = booksByCategory['Featured']?.[0];
+  
     return (
     <div className="min-h-screen bg-black">
       {/* Hero Section */}
@@ -33,11 +34,7 @@ export default function BooksPage() {
       {/* Book Carousels */}
       <div className="container mx-auto px-6 py-8">
         {Object.entries(booksByCategory).map(([category, books]) => (
-          <BookCarousel
-            key={category}
-            title={category}
-            books={books}
-          />
+          <BookCarousel key={category} title={category} books={books}/>
         ))}
       </div>
     </div>

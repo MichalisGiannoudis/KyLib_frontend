@@ -1,6 +1,6 @@
 "use client";
 
-import SignIn from '@/components/authentication/signIn.component';
+import { SignIn } from "@/components/authentication/signIn.component";
 
 export default function LandingPage() {
 

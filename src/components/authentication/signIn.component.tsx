@@ -4,19 +4,14 @@ import { useContent } from '@/hooks/useContent';
 import { AuthContent } from '@/types/content/authContent.interface';
 import { useState } from 'react';
 
-interface SignInProps {
-  onSignIn?: (email: string, password: string) => void;
-  onForgotPassword?: () => void;
-  onSignUp?: () => void;
-}
-
-const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
+export const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: { onSignIn?: (email: string, password: string) => void, onForgotPassword?: () => void, onSignUp?: () => void }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({ email: '', password: '' });
-  const { emailLabel, passwordLabel } = useContent('auth-page') as AuthContent;
+
+  const { emailLabel, passwordLabel, signInLabel } = useContent('auth-page') as AuthContent;
 
   const validateForm = () => {
     const newErrors = { email: '', password: '' };
@@ -136,16 +131,17 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
             </svg>
           </div>
         ))}
-      </div>      <div className="relative z-10 w-full max-w-md">
-        {/* Logo/Header */}
+      </div>
+
+      <div className="relative z-10 w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">KyLib</h1>
-          <p className="text-gray-300">Welcome back! Please sign in to your account.</p>
+          <p className="text-gray-300">{signInLabel}</p>
         </div>
 
         {/* Sign In Form */}
         <div className="bg-gray-800/80 backdrop-blur-lg border border-gray-700/50 rounded-2xl shadow-2xl p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">            {/* Email Field */}
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-2">
                 {emailLabel}
@@ -155,14 +151,11 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className={`w-full px-4 py-3 bg-gray-700/50 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-colors text-white placeholder-gray-400 ${
-                  errors.email ? 'border-red-400' : 'border-gray-600'
-                }`}
+                className={`w-full px-4 py-3 bg-gray-700/50 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-colors text-white placeholder-gray-400 ${errors.email ? 'border-red-400' : 'border-gray-600'}`}
                 placeholder="Enter your email"
-                disabled={isLoading}              />
-              {errors.email && (
-                <p className="mt-1 text-sm text-red-400">{errors.email}</p>
-              )}
+                disabled={isLoading}/>
+              {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>
+              }
             </div>
 
             {/* Password Field */}
@@ -170,32 +163,31 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
               <label htmlFor="password" className="block text-sm font-medium text-gray-200 mb-2">
                 {passwordLabel}
               </label>
-              <div className="relative">                <input
-                  id="password"
-                  type={showPassword ? 'text' : 'password'}
-                  value={password}
+              <div className="relative">
+                <input 
+                  id="password" 
+                  type={showPassword ? 'text' : 'password'} 
+                  value={password} 
                   onChange={(e) => setPassword(e.target.value)}
-                  className={`w-full px-4 py-3 bg-gray-700/50 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-colors pr-12 text-white placeholder-gray-400 ${
-                    errors.password ? 'border-red-400' : 'border-gray-600'
-                  }`}
+                  className={`w-full px-4 py-3 bg-gray-700/50 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-colors pr-12 text-white placeholder-gray-400 ${errors.password ? 'border-red-400' : 'border-gray-600'}`}
                   placeholder="Enter your password"
                   disabled={isLoading}
-                />                <button
+                />
+                <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-200"
                   disabled={isLoading}
                 >
-                  {showPassword ? (
-                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L6.171 6.171M9.878 9.878a3 3 0 105.303 5.303m0 0l3.536 3.536M20.829 6.171L16.536 10.464" />
-                    </svg>
-                  ) : (
-                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.543 7-1.275 4.057-5.065 7-9.543 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                  )}
+                  {showPassword ?
+                    <div>
+                      <img src="/images/auth/show.png" className="h-5 w-5"/>
+                    </div>
+                   :
+                    <div>
+                      <img src="/images/auth/hide.png" className="h-5 w-5"/>
+                    </div>
+                  }
                 </button>
               </div>
               {errors.password && (
@@ -203,7 +195,8 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
               )}
             </div>
 
-            {/* Remember Me & Forgot Password */}            <div className="flex items-center justify-between">
+            {/* Remember Me & Forgot Password */}
+            <div className="flex items-center justify-between">
               <label className="flex items-center">
                 <input
                   type="checkbox"
@@ -222,7 +215,8 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
               </button>
             </div>
 
-            {/* Sign In Button */}            <button
+            {/* Sign In Button */}
+            <button
               type="submit"
               disabled={isLoading}
               className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -242,7 +236,8 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
           </form>
 
           {/* Divider */}
-          <div className="mt-6">            <div className="relative">
+          <div className="mt-6">
+            <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-600" />
               </div>
@@ -252,7 +247,8 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
             </div>
           </div>
 
-          {/* Social Sign In Options */}          <div className="mt-6 grid grid-cols-2 gap-3">
+          {/* Social Sign In Options */}
+          <div className="mt-6 grid grid-cols-2 gap-3">
             <button
               type="button"
               className="w-full inline-flex justify-center py-2 px-4 border border-gray-600 rounded-lg shadow-sm bg-gray-700/50 text-sm font-medium text-gray-300 hover:bg-gray-600/50 hover:text-white transition-colors"
@@ -277,7 +273,9 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
               </svg>
               <span className="ml-2">Facebook</span>
             </button>
-          </div>          {/* Sign Up Link */}
+          </div>
+
+          {/* Sign Up Link */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-400">
               Do not have an account?{' '}
@@ -289,11 +287,10 @@ const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: SignInProps) => {
               >
                 Sign up here
               </button>
-            </p>          </div>
+            </p>
+          </div>
         </div>
       </div>
     </div>
   );
 };
-
-export default SignIn;
