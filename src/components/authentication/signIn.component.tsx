@@ -98,7 +98,7 @@ export const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: { onSignIn?: (e
                   className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-200"
                   disabled={isLoading}
                 >
-                  { showPassword ? <div><img src="/images/auth/show.png" className="h-5 w-5"/></div> : <div><img src="/images/auth/hide.png" className="h-5 w-5"/></div> }
+                  { showPassword ? <img src="/images/auth/show.png" className="h-5 w-5"/> : <img src="/images/auth/hide.png" className="h-5 w-5"/> }
                 </button>
               </div>
               { errors.password && <p className="mt-1 text-sm text-red-400">{errors.password}</p> }
@@ -107,7 +107,10 @@ export const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: { onSignIn?: (e
             {/* Remember Me & Forgot Password */}
             <div className="flex items-center justify-between">
               <label className="flex items-center">
-                <input type="checkbox" className="rounded border-gray-600 bg-gray-700/50 text-blue-400 focus:ring-blue-400 focus:ring-offset-gray-800" disabled={isLoading}/>
+                <input 
+                  type="checkbox" 
+                  className="rounded-xl border-blue-900 bg-blue-700/50 text-blue-400 focus:ring-blue-400 focus:ring-offset-gray-800" 
+                  disabled={isLoading}/>
                 <span className="ml-2 text-sm text-gray-300">Remember me</span>
               </label>
               <button type="button" onClick={onForgotPassword} className="text-sm text-blue-400 hover:text-blue-300 font-medium" disabled={isLoading}>Forgot password?</button>
