@@ -52,91 +52,10 @@ export const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: { onSignIn?: (e
   };  
   
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 p-4 overflow-hidden">      {/* Animated Background with Floating Books */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Book Icons */}
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={i}
-            className={`absolute text-blue-300/20 animate-float-${i % 4}`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${8 + Math.random() * 4}s`,
-            }}
-          >
-            <svg
-              className={`${i % 3 === 0 ? 'w-6 h-6' : i % 3 === 1 ? 'w-8 h-8' : 'w-10 h-10'}`}
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              style={{ transform: `rotate(${(i * 15) % 360}deg)` }}
-            >
-              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 19V5h6v14H5zm8 0V5h6v14h-6z"/>
-            </svg>
-          </div>
-        ))}
-          {/* Additional floating elements - Open books */}
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={`page-${i}`}
-            className={`absolute text-indigo-300/15 animate-float-page-${i % 3}`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 6}s`,
-              animationDuration: `${10 + Math.random() * 5}s`,
-            }}
-          >
-            <svg
-              className={`${i % 2 === 0 ? 'w-4 h-4' : 'w-6 h-6'}`}
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
-            </svg>
-          </div>
-        ))}
-        
-        {/* Floating sparkles */}
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={`sparkle-${i}`}
-            className="absolute animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`,
-            }}            >
-            <div className="w-1 h-1 bg-blue-400/30 rounded-full"></div>
-          </div>
-        ))}
-        
-        {/* Additional book-related icons */}
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={`bookmark-${i}`}
-            className={`absolute text-blue-400/20 animate-float-${(i + 2) % 4}`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 7}s`,
-              animationDuration: `${12 + Math.random() * 6}s`,
-            }}
-          >
-            <svg
-              className="w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
-            </svg>
-          </div>
-        ))}
-      </div>
-
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 p-4 overflow-hidden">
       <div className="relative z-10 w-full max-w-md">
+
+        {/* Title */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">KyLib</h1>
           <p className="text-gray-300">{signInLabel}</p>
