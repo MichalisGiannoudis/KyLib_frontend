@@ -22,7 +22,7 @@ export const useBooksByCategory = (): UseBooksByCategoryResult => {
         setError(null);
         
         const apiUrl = process.env.NEXT_PUBLIC_LOCAL_API_URL;
-        const response = await fetch(`${apiUrl}/books`);
+        const response = await fetch(`${apiUrl}/api/books`);
         
         if (!response.ok) {
           throw new Error(`Failed to fetch books: ${response.status} ${response.statusText}`);

@@ -1,6 +1,8 @@
 export interface UserInfo  {
     name: string;
     surname: string;
+    email: string;
+    password: string;
     phoneNumber?: string;
     role: 'admin' | 'user';
     createdAt: string;

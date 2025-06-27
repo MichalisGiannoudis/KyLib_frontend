@@ -25,7 +25,7 @@ export const useBook = (id: string): UseBookResult => {
         setError(null);
         
         const apiUrl = process.env.NEXT_PUBLIC_LOCAL_API_URL;
-        const response = await fetch(`${apiUrl}/book/${id}`);
+        const response = await fetch(`${apiUrl}/api/book/${id}`);
         
         if (!response.ok) {
           throw new Error(`Failed to fetch book: ${response.status} ${response.statusText}`);

@@ -1,18 +1,16 @@
-'use client';
-
+import { useState } from 'react';
 import { useContent } from '@/hooks/useContent';
 import { AuthContent } from '@/types/content/authContent.interface';
-import { useState } from 'react';
-import { Spinner } from '../utilites/spinner.component';
+import { Spinner } from '@/components/utilites/spinner.component';
 
-export const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: { onSignIn?: (email: string, password: string) => void, onForgotPassword?: () => void, onSignUp?: () => void }) => {
+export const SignIn = ({ onSignIn, onSignUp, onForgotPassword }: { onSignIn?: (email: string, password: string) => void, onForgotPassword?: () => void, onSignUp?: () => void }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({ email: '', password: '' });
 
-  const { emailLabel, passwordLabel, signInLabel } = useContent('auth-page') as AuthContent;
+  const { emailLabel, passwordLabel } = useContent('auth-page') as AuthContent;
 
   const validateForm = () => {
     const newErrors = { email: '', password: '' };
@@ -25,8 +23,8 @@ export const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: { onSignIn?: (e
     
     if (!password.trim()) {
       newErrors.password = 'Password is required';
-    } else if (password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+    } else if (password.length < 4) {
+      newErrors.password = 'Password must be at least 4 characters';
     }
     
     setErrors(newErrors);
@@ -58,7 +56,6 @@ export const SignIn = ({ onSignIn, onForgotPassword, onSignUp }: { onSignIn?: (e
         {/* Title */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">KyLib</h1>
-          <p className="text-gray-300">{signInLabel}</p>
         </div>
 
         {/* Sign In Form */}
