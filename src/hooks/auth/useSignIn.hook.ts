@@ -1,9 +1,11 @@
 import { UserStore } from "@/store/user";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export const useSignInHook = () => {
     
     const API_URL = process.env.NEXT_PUBLIC_LOCAL_API_URL
+    const router = useRouter();
 
     const user = UserStore((state) => state.user);
     const setUser = UserStore((state) => state.setUser);
@@ -30,9 +32,8 @@ export const useSignInHook = () => {
             const data = await res.json();
             setUser(data);
             
-            if (data) {
-                console.log('User signed in successfully:', user);
-            }
+            // Redirect to books page after successful sign-in
+            router.push('/books');
         }
         catch (error) {
             if (error instanceof Error) {
