@@ -3,6 +3,7 @@
 import { useBooksByCategory } from "@/hooks/useBooksByCategory";
 import BookCarousel from '@/components/home/bookCarousel.component';
 import HeroSection from '@/components/home/heroSection.component';
+import { NavBarComponent } from "@/components/home/navBar.component";
 
 export default function BooksPage() {
     
@@ -28,6 +29,10 @@ export default function BooksPage() {
   
     return (
     <div className="min-h-screen bg-black">
+
+      {/* Navigation Bar */}
+      <NavBarComponent />
+
       {/* Hero Section */}
       <HeroSection featuredBook={featuredBook} />
       
